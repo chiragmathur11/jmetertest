@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - name: Create reports directory
-        run: mkdir reportss
+        run: mkdir reports
       - name: PerfAction for JMeter
         # You may pin to the exact commit or the version.
         # uses: QAInsights/PerfAction@5a3c503bff845dd019d4b6e30d71f4585494a2ea
@@ -35,20 +35,20 @@ jobs:
           test-plan-path: './jmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
          # results-file: result.jtl
-          args: "-e -o ./reportss/html"
+          args: "-e -o ./reports/html"
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
-          path: results.jtl
+          path: result.jtl
           if-no-files-found: error
       
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-html-reports
-          path: reportss
+          path: reports
           if-no-files-found: error
           
            npm install -g send-html-email
