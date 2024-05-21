@@ -23,10 +23,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Create reports directory
-      run: mkdir ./reports
+      run: mkdir reports
 
     - name: Create html directory
-      run: mkdir ./reports/html/
+      run: mkdir reports/html/
 
     #JMter Test Execution
     - name: JMeter Test
