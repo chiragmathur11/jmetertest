@@ -81,7 +81,7 @@ jobs:
           # Required mail subject:
           subject: Github Actions job result
           # Required recipients' addresses:
-          to: chirag.mathur@telus.com
+          to: chiragmathur2014@gmail.com
           # Required sender full name (address can be skipped):
           from: notifications@github.com # <user@example.com>
           # Optional plain body:
