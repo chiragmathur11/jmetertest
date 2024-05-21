@@ -34,14 +34,14 @@ jobs:
           # JMeter test plan to execute
           test-plan-path: './jmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
-          results-file: ./reports/result.jtl
+          results-file: ./reports/result.csv
           args: "-e -o ./reports/html"
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
-          path: reports/result.jtl
+          path: reports/result.csv
           if-no-files-found: error
 
       - name: Upload HTML Reports
@@ -73,14 +73,8 @@ jobs:
     # Enter the subject of the mail. (The prefix 'file://' if you want to read a file)
           subject: Test Mail
     # Enter the body of the mail. (The prefix 'file://' if you want to read a file)
-          body: Test Body
+          body: '[{"path":"./testreport/index.html"}]'
     # Enter Content-Type HTTP header. (defaults to 'text/plain')
           #contentType: text/plain
     # Attachment files are entered as an array. Required key 'path'. (The prefix 'file://' if you want to read a file)
-          attachments: '[{"path":"./testreport/index.html"}]'
-
-      - name: HTML Preview
-        id: html_preview
-        uses: pavi2410/html-preview-action@v2
-        with:
-          html_file: 'steps.html_preview.outputs.url'
+          attachments: '[{"path":".reports/result.csv"}]'
