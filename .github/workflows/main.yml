@@ -85,7 +85,7 @@ jobs:
           # Required sender full name (address can be skipped):
           from: notifications@github.com # <user@example.com>
           # Optional plain body:
-          body: Build job of ${{github.repository}} completed successfully! Please find the attached jtl for detailed view
+          body: Build job of ${{github.repository}} completed successfully!
          # Optional HTML body read from file:
          # html_body: file://reports/html/index.html
           # Optional carbon copy recipients:
@@ -101,7 +101,7 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: file://reports/html/index.html
+          attachments: '[{"path":"file://reports/html/index.html"}]'
           #attachments: '[{"path":"reports/jmeter-results/result.jtl"}]'
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
