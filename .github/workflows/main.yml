@@ -50,3 +50,19 @@ jobs:
           name: jmeter-results
           path: reports/html
           if-no-files-found: error
+
+      - name: Send Email
+        uses: hilarion5/send-mail@v1
+        with:
+          smtp-server: smtp.gmail.com
+          smtp-port: 465
+          smtp-secure: true
+          from-email: donotreply.testresults@gmail.com
+          to-email: chiragmathur2014@gmail.com
+          username: donotreply.testresults@gmail.com
+          password: zjamxgxmzjlsivtp
+          subject: Test Email
+          body: This is a test email sent from GitHub Actions.
+          html: |
+              <h1>This is a test email</h1>
+              <p>Test Paragraph</p>
