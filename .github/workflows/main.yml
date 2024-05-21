@@ -34,31 +34,23 @@ jobs:
           # JMeter test plan to execute
           test-plan-path: './jmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
-          results-file: ./reports/result.xml
-          #args: "-e -o ./reports/html"
-          args: "-Jjmeter.save.saveservice.output_format=xml"
+          results-file: ./reports/result.jtl
+          args: "-e -o ./reports/html"
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
-          path: reports/result.xml
+          path: reports/result.jtl
           if-no-files-found: error
 
-      #- name: Upload HTML Reports
-      #  uses: actions/upload-artifact@v3
-       # with:
-       #   name: jmeter-results
-       #   path: reports/html
-        #  if-no-files-found: error
-
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+      - name: Upload HTML Reports
+        uses: actions/upload-artifact@v3
         with:
-           files: |
-             jmeter-results/*.xml
-                       
+          name: jmeter-results
+          path: reports/html
+          if-no-files-found: error
+                      
       - name: Send mailer
   # You may pin to the exact commit or the version.
   # uses: devellany/send-mail@45dbe31722b9c29635bc9d60315d420218093c56
