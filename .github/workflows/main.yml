@@ -101,7 +101,7 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          attachments: '[{"path":"reports/html/index.html"}]'
+          attachments: '[{"path":"jmeter-html-reports/html/index.html"}]'
           #attachments: '[{"path":"reports/jmeter-results/result.jtl"}]'
           # Optional priority: 'high', 'normal' (default) or 'low'
           priority: low
