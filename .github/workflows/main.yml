@@ -57,9 +57,9 @@ jobs:
         uses: hoatruongdev09/extract-zip@v1.2
         with:
     # zip file path
-          input-path: jmeter-results
+          input-path: actions/upload-artifact@v3/jmeter-results.zip
     # extract folder path
-          output-path: main/testreport/
+          output-path: ./testreport/
           
       - name: Send mailer
   # You may pin to the exact commit or the version.
