@@ -34,14 +34,14 @@ jobs:
           # JMeter test plan to execute
           test-plan-path: './jmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
-          results-file: ./reports/result.csv
+          results-file: ./reports/result.jtl
           args: "-e -o ./reports/html"
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
-          path: reports/result.csv
+          path: reports/result.jtl
           if-no-files-found: error
 
       - name: Upload HTML Reports
@@ -77,4 +77,4 @@ jobs:
     # Enter Content-Type HTTP header. (defaults to 'text/plain')
           #contentType: text/plain
     # Attachment files are entered as an array. Required key 'path'. (The prefix 'file://' if you want to read a file)
-          attachments: '[{"path":"jmeter-results/result.csv"}]'
+          attachments: '[{"path":"jmeter-results/result.jtl"}]'
