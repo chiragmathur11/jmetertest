@@ -35,7 +35,7 @@ jobs:
           test-plan-path: './jmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./reports/result.jtl
-          args: "-e -o ./reports/html"
+          args: "-e -o ./testreport"
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
@@ -48,8 +48,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
-          path: reports/html
+          path: testreport
           if-no-files-found: error
-
-      - name: Move report
-        run: cp reports/html/jmeter-results ./testreport
