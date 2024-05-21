@@ -57,10 +57,10 @@ jobs:
           host: smtp.gmail.com
       # Optional port (defaults to 465)
           port: 465
-          account: ${{secrets.donotreply.testresults@gmail.com}}
-          password: ${{secrets.zjamxgxmzjlsivtp}}
+          account: donotreply.testresults@gmail.com
+          password: zjamxgxmzjlsivtp
           sender: devellany
-          from: ${{secrets.donotreply.testresults@gmail.com}}
+          from: donotreply.testresults@gmail.com
           to: chiragmathur2014@gmail.com
           subject: Test Mail
           body: Test Mail
