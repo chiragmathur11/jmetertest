@@ -51,17 +51,20 @@ jobs:
           path: reports/html
           if-no-files-found: error
 
-      - name: Send Email
-        uses: hilarion5/send-mail@v1
+      - name: Send email
+        uses: devellany/send-mailer@v1.0.2
         with:
-          smtp-server: smtp.gmail.com
-          smtp-port: 465
-          smtp-secure: true
-          from-email: donotreply.testresults@gmail.com
-          to-email: chiragmathur2014@gmail.com
-          username: donotreply.testresults@gmail.com
-          password: zjamxgxmzjlsivtp
-          subject: Test Email
-          body: This is a test email sent from GitHub Actions.
-          # html: '[{"path":"reports/html/index.html"}]'
-          attachments: '[{"path":"html/index.html"}]'
+          host: smtp.google.com
+      # Optional port (defaults to 465)
+          port: 465
+          account: ${{secrets.ACCOUNT}}
+          password: ${{secrets.zjamxgxmzjlsivtp}}
+          sender: devellany
+          from: ${{secrets.donotreply.testresults@gmail.com}}
+          to: chiragmathur2014@gmail.com
+          subject: Test Mail
+          body: Test Mail
+      # Optional content type (defaults to text/plain)
+          contentType: text/html
+      # Optional attachment files (JSON type. require property 'path')
+          attachments: '[{"path":"README.md"}]'
