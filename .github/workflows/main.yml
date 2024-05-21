@@ -63,5 +63,5 @@ jobs:
           password: zjamxgxmzjlsivtp
           subject: Test Email
           body: This is a test email sent from GitHub Actions.
-          html: '[{"path":"reports/html/index.html"}]'
-          attachments: '[{"path":"reports/html/index.html"}]'
+          # html: '[{"path":"reports/html/index.html"}]'
+          attachments: '[{"path":"reports/index.html"}]'
