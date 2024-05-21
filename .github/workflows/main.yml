@@ -50,3 +50,31 @@ jobs:
           name: jmeter-results
           path: reports/html
           if-no-files-found: error
+
+      - name: Send mailer
+  # You may pin to the exact commit or the version.
+  # uses: devellany/send-mail@45dbe31722b9c29635bc9d60315d420218093c56
+        uses: devellany/send-mail@v1.0.2
+        with:
+    # Enter SMTP host.
+          host: smtp.gmail.com
+    # Enter SMTP port. (defaults to 465)
+          port: 465
+    # Enter SMTP host account.
+          account: donotreply.testresults@gmail.com
+    # Enter SMTP host account password.
+          password: zjamxgxmzjlsivtp
+    # Enter sender name.
+          sender: Chirag
+    # Enter sender mail.
+          from: donotreply.testresults@gmail.com
+    # Enter recipient emails and separated with 'comma'. (The prefix 'file://' if you want to read a file)
+          to: chiragmathur2014@gmail.com
+    # Enter the subject of the mail. (The prefix 'file://' if you want to read a file)
+          subject: Test Mail
+    # Enter the body of the mail. (The prefix 'file://' if you want to read a file)
+          body: Test Body
+    # Enter Content-Type HTTP header. (defaults to 'text/plain')
+          #contentType: text/plain
+    # Attachment files are entered as an array. Required key 'path'. (The prefix 'file://' if you want to read a file)
+          attachments: '[{"path":"reports/result.jtl"}]'
