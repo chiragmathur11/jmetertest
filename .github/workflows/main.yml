@@ -77,4 +77,4 @@ jobs:
     # Enter Content-Type HTTP header. (defaults to 'text/plain')
           #contentType: text/plain
     # Attachment files are entered as an array. Required key 'path'. (The prefix 'file://' if you want to read a file)
-          attachments: '[{"path":"README.md"}]'
+          attachments: '[{"path":"jmeterjenkins.jmx"}]'
