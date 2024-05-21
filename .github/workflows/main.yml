@@ -73,7 +73,7 @@ jobs:
     # Enter the subject of the mail. (The prefix 'file://' if you want to read a file)
           subject: Test Mail
     # Enter the body of the mail. (The prefix 'file://' if you want to read a file)
-          body: '[{"path":"./testreport/index.html"}]'
+          body: Test Mail
     # Enter Content-Type HTTP header. (defaults to 'text/plain')
           #contentType: text/plain
     # Attachment files are entered as an array. Required key 'path'. (The prefix 'file://' if you want to read a file)
