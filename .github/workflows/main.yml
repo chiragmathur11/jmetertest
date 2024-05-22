@@ -50,23 +50,3 @@ jobs:
           name: jmeter-results
           path: reports/html
           if-no-files-found: error
-
-      - name: Action Mailgun Email
-  # You may pin to the exact commit or the version.
-  # uses: maful/github-actions-mailgun@7e8f8ebbbd9ab15dfdb9430fcf1301696787a804
-        uses: maful/github-actions-mailgun@v1.0.2
-        with:
-    # Mailgun API Key
-          api_key: pubkey-f4849bfc7f53a2b063fcce0a2571e767
-    # Mailgun Domain
-          domain: smtp.mailgun.org
-    # Sender email
-          from: postmaster@sandbox3eb63f6448bb449b97e23ec1489e228d.mailgun.org
-    # Recipient email
-          to: chiragmathur2014@gmail.com
-    # Email subject
-          subject: this is Mailgun Mail
-    # Email body
-          body: This is mailgun mail
-    # Attachment
-          #attachment: # optional       
