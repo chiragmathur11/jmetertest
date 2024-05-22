@@ -51,22 +51,22 @@ jobs:
           path: reports/html
           if-no-files-found: error
 
-      - name: Mailgun Action
+      - name: Action Mailgun Email
   # You may pin to the exact commit or the version.
-  # uses: vineetchoudhary/mailgun-action@a25d236b31970d671006f4ced13b2c88af390753
-        uses: vineetchoudhary/mailgun-action@v1.1
+  # uses: maful/github-actions-mailgun@7e8f8ebbbd9ab15dfdb9430fcf1301696787a804
+        uses: maful/github-actions-mailgun@v1.0.2
         with:
     # Mailgun API Key
-          api-key: 1b9cd3adab76e4d1859b4a510beac9bb-a2dd40a3-9ce3a97e
-    # Your Domain Name
-          domain: smtp.gmail.com
-    # Email address of the recipient(s). Example: bob@host.com. You can use commas to separate multiple recipients.
+          api_key: pubkey-f4849bfc7f53a2b063fcce0a2571e767
+    # Mailgun Domain
+          domain: smtp.mailgun.org
+    # Sender email
+          from: postmaster@sandbox3eb63f6448bb449b97e23ec1489e228d.mailgun.org
+    # Recipient email
           to: chiragmathur2014@gmail.com
-    # Email address to recieve carbon copies. Example: bob@host.com. You can use commas to separate multiple recipients.
-          #cc: # optional
-    # The email that will be shown as sender. Default will be hello@+your domain name. Like - hello@example.com
-         # from: # optional
-    # Email subject.
-          subject: This is mailgun test email
-    # Body of the email (HTML Supported).
-          body: This is mailgun test email
+    # Email subject
+          subject: this is Mailgun Mail
+    # Email body
+          body: This is mailgun mail
+    # Attachment
+          #attachment: # optional       
