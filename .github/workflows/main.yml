@@ -35,7 +35,8 @@ jobs:
           test-plan-path: './jmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./reports/result.jtl
-          args: "-e -o ./reports/html"
+          #args: "-e -o ./reports/html"
+          args: "-Jjmeter.save.saveservice.output_format=xml"
 
       - name: Upload Results
         uses: actions/upload-artifact@v3
@@ -44,9 +45,16 @@ jobs:
           path: reports/result.jtl
           if-no-files-found: error
 
-      - name: Upload HTML Reports
-        uses: actions/upload-artifact@v3
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
         with:
-          name: jmeter-results
-          path: reports/html
-          if-no-files-found: error
+          files: |
+            jmeter-results/result.jtl
+      
+      #- name: Upload HTML Reports
+       # uses: actions/upload-artifact@v3
+       # with:
+        #  name: jmeter-results
+         # path: reports/html
+          #if-no-files-found: error
