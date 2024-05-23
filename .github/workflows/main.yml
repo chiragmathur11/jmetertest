@@ -61,7 +61,7 @@ jobs:
         run: echo "${{ steps.package.outputs.content }}" 
 
       - name: column read
-        run:  $FLAG=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl
+        run:  ${FLAG}=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl
 
       - name: flag print
         run: echo ${FLAG}
