@@ -32,11 +32,26 @@ jobs:
         uses: QAInsights/PerfAction@v5.6.2
         with:
           # JMeter test plan to execute
-          test-plan-path: './UddatedSMP5.jmx'
+          test-plan-path: './ACCC_01_HTTPGET_WEBSERVICE.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           #args: "-e -o ./sanity/html"
           args: "-H 198.161.14.25 -P 8080"
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-resultss
+          path: sanity/result.jtl
+          if-no-files-found: error
+
+      - name: Upload HTML Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-resultss
+          path: sanity/result.jtl
+          if-no-files-found: error
+
   job2:
     name: job2
     needs: job1  
