@@ -67,7 +67,7 @@ jobs:
         run: |
           echo "Original Flag = $flag"
           #awk -F "," '{if($5=="OK") $flag=0}' sanity/result.jtl
-          awk -F "," '{if($5=="OK") {$flag=$flag+1}}' sanity/result.jtl
+          awk -F "," '{if($5=="OK") $flag=$flag+1}' sanity/result.jtl
           echo "Updated Flag = $flag"
          # echo "value=$myvalue" >> $GITHUB_ENV
          # echo "${{env.value}}"
