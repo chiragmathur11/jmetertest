@@ -52,8 +52,6 @@ jobs:
           path: sanity/result.jtl
           if-no-files-found: error
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
       - name: Read result.jtl
         id: package
         uses: juliangruber/read-file-action@v1
