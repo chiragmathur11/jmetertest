@@ -62,7 +62,7 @@ jobs:
 
       - name: column read
         #run: myValue=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> $GITHUB_ENV
-        run: myValue='awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl' >> $GITHUB_ENV
+        run: myValue=$(awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl)
 
       - name: Echo myValue
         run: echo $myValue
