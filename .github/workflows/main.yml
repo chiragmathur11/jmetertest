@@ -32,7 +32,7 @@ jobs:
         uses: QAInsights/PerfAction@v5.6.2
         with:
           # JMeter test plan to execute
-          test-plan-path: './SMP5.jmx'
+          test-plan-path: './UddatedSMP5.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           #args: "-e -o ./sanity/html"
