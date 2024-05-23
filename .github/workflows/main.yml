@@ -69,4 +69,7 @@ jobs:
          # echo "${{env.value}}"
 
       - name: cat
-        run: cat abc.txt
+        run: abc=$(cat "abc.txt")
+
+      - name: tempvar
+        run: echo $abc
