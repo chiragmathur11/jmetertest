@@ -64,6 +64,6 @@ jobs:
         #run: myValue=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> $GITHUB_ENV
         #run: awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
         run: |
-          myvalue=$(awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl)
-          echo "value=$myvalue" >> $GITHUB_ENV
-          echo "${{env.value}}"
+          myvalue=$(cat sanity/result.jtl | grep $5)
+         # echo "value=$myvalue" >> $GITHUB_ENV
+         # echo "${{env.value}}"
