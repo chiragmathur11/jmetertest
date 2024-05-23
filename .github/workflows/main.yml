@@ -65,10 +65,10 @@ jobs:
         #run: myValue=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> $GITHUB_ENV
         #run: awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
         run: |
-          awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
-          cat abc.txt
+          #awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
+          #cat abc.txt
           #echo "Original Flag = $flag"
-          #awk -F "," '{if($5=="OK") $flag=0}' sanity/result.jtl
+          awk -F "," '{if($5=="OK") exit 1}' sanity/result.jtl
           #awk -F "," '{if($1=="OK") {varss1=0}}' sanity/result.jtl
           #echo "Updated Flag = $varss1"
          # echo "value=$myvalue" >> $GITHUB_ENV
