@@ -61,7 +61,7 @@ jobs:
         run: echo "${{ steps.package.outputs.content }}" 
 
       - name: column read
-        run:  awkresult = awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl
+        run: echo "myValue=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl" >> $GITHUB_ENV
 
-      - name: flag print
-        run: echo ${awkresult}
+      - name: Echo myValue
+        run: echo "$myValue"
