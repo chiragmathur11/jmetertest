@@ -61,4 +61,4 @@ jobs:
         run: echo "${{ steps.package.outputs.content }}" 
 
       - name: column read
-        run: awk '{print $5}' sanity/result.jtl
+        run: awk -F "," '{print $5}' sanity/result.jtl
