@@ -58,7 +58,7 @@ jobs:
         with:
           path: sanity/result.jtl
       - name: Echo result.jtl
-        run: echo "${{ steps.package.outputs.content }}" >> $MAGICDATA
+        run: echo "${{ steps.package.outputs.content }}" 
 
-      - name: jtldata
-        run: echo "${jtldata}"
+      - name: column read
+        run: awk '{print $5}' sanity/result.jtl
