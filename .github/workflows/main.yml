@@ -11,7 +11,8 @@ on:
     branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+env:
+  flag: 1
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -62,14 +63,10 @@ jobs:
 
       - name: column read
         #run: myValue=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> $GITHUB_ENV
-        run: awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
-        #run: |
-          #myvalue=$(awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl)
+        #run: awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
+        run: |
+          echo "Original Flag = $flag"
+          awk -F "," '{if($5=="OK") $flag=0}' sanity/result.jtl
+          echo "Updated Flag = $flag"
          # echo "value=$myvalue" >> $GITHUB_ENV
          # echo "${{env.value}}"
-
-      - name: cat
-        run: abc=$(cat "abc.txt")
-
-      - name: tempvar
-        run: echo $abc
