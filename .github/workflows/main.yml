@@ -69,11 +69,14 @@ jobs:
           #awk -F "," '{if($5=="OK") $flag=0}' sanity/result.jtl
           #awk -F "," '{if($1=="OK") {varss1=0}}' sanity/result.jtl
           awk -F "," '{
-                       if[[ ! $5 =~ "OK"]] 
-                       then
+                       if($5 does not contain "OK")
+                       {
                        echo hello
+                       }
                        else
+                       {
                        echo failed
+                       }
                        }' sanity/result.jtl
           #echo "Updated Flag = $varss1"
          # echo "value=$myvalue" >> $GITHUB_ENV
