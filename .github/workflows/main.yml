@@ -71,7 +71,7 @@ jobs:
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT"
               #if [$TEXT > 1]; then
-              if [[$TEXT > 0]]; then
+              if ($TEXT < 3) then
               echo "::set-output name=run_jobs::true"
               else
               echo "::set-output name=run_jobs::false"
