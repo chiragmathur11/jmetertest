@@ -64,8 +64,21 @@ jobs:
       - name: column read
         run: |
           awk -F "," 'NR>1 {
-          if($5!="OK")
+          if($5=="OK")
           {
-          print "Hello Chirag"
+          job2:
+          name: job2
+          runs-on: ubuntu-latest
+          steps:
+              - uses: actions/checkout@v4
+              - name: Create reports directory
+              - run: mkdir reports
+              - name: PerfAction for JMeter
+                uses: QAInsights/PerfAction@v5.6.2
+                with:
+                   test-plan-path: './latestjmeterjenkins.jmx'
+                   results-file: ./loadtest/result.jtl
+                   args: "-e -o ./loadtest/html"
+         
           }
           else {print "Hello World"}}' sanity/result.jtl
