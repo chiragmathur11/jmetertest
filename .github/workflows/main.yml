@@ -72,7 +72,7 @@ jobs:
            else
            {
              exit
-           }
+           }' sanity/result.jtl
 
       #- name: column read
        # run: |
