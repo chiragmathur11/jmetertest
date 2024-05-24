@@ -70,15 +70,31 @@ jobs:
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT"
-              if [$TEXT > 1]
-              echo "reach"
-              echo "::set-output name=run_jobs::true"
-              else
-              echo "reach 1"
-              echo "::set-output name=run_jobs::false"
-              fi
+              #if [$TEXT > 1]
+              #echo "reach"
+             # echo "::set-output name=run_jobs::true"
+             # else
+             # echo "reach 1"
+             # echo "::set-output name=run_jobs::false"
+             # fi
               #if: github.repository == 'octo-org/octo-repo-prod'
 
+      #- if: "!contains($Text, '0')"
+       # steps:
+        # - name: condition 1
+         #  if: "contains($Text, '1')"
+          # run: echo "This is line 1"
+         #- name: condition 2
+           #if: "contains($Text, '2')"
+          # run: echo "There is two error"
+
+      - if: $Text > 1
+        name: IF
+        run: |
+             echo "line 1"
+             echo "::set-output name=run_jobs::true"
+        
+              
   job2:
     name: Job 2
     needs: [job1]
