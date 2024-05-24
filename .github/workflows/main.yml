@@ -71,5 +71,6 @@ jobs:
               TEXT=`cat abc.txt`
               #echo "This is $TEXT"
               if($TEXT=="false")
-              exit 1
+              exit 
+              fi
               echo "This is successfull"
