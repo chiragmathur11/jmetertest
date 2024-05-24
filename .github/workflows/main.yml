@@ -72,7 +72,8 @@ jobs:
               echo "This is $TEXT" 
               #if [$TEXT > 1]
       - name: if condition
-        if: $TEXT > 1
+        #if: $TEXT > 1
+        if: "!contains($TEXT, '0')"
         run: |
               echo "reach"
               echo "::set-output name=run_jobs::true"
