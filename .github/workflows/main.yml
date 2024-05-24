@@ -71,8 +71,9 @@ jobs:
               TEXT=`cat abc.txt | grep false | wc -l` >> $GITHUB_ENV
               echo "This is ${{env.TEXT}}" 
               #if [$TEXT > 1]
-              #echo "reach"
-             # echo "::set-output name=run_jobs::true"
+              if: $TEXT < 1
+              echo "reach"
+              echo "::set-output name=run_jobs::true"
              # else
              # echo "reach 1"
              # echo "::set-output name=run_jobs::false"
@@ -88,11 +89,11 @@ jobs:
            #if: "contains($Text, '2')"
           # run: echo "There is two error"
 
-      - if: ${{env.TEXT}} < 1
-        name: IF
-        run: |
-             echo "line 1"
-             echo "::set-output name=run_jobs::true"
+      #- if: $TEXT < 1
+       # name: IF
+       # run: |
+          #   echo "line 1"
+           #  echo "::set-output name=run_jobs::true"
         
               
   job2:
