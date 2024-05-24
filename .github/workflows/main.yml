@@ -72,5 +72,4 @@ jobs:
               #echo "This is $TEXT"
               if($TEXT=="false")
               exit 1
-              fi
               echo "This is successfull"
