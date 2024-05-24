@@ -61,7 +61,33 @@ jobs:
       - name: Echo result.jtl
         run: echo "${{ steps.package.outputs.content }}" 
 
-      - name: column read
-        run: |
-          var2=$(awk -F -V "," 'NR>1{if($5=="OK") print "hello"}' sanity/result.jtl)
-          cat $var2
+
+      - name: conditioncheck
+      - run: | 
+           awk -F "," 'NR>1 {
+           if($5=="OK")
+           {
+             return job2
+           } 
+           else
+           {
+             exit
+           }
+
+      #- name: column read
+       # run: |
+        #  awk -F -V "," 'NR>1{if($5=="OK") print "hello"}' sanity/result.jtl
+      
+  job2:
+          name: job2
+          runs-on: ubuntu-latest
+          steps:
+              - uses: actions/checkout@v4
+              - name: Create reports directory
+              - run: mkdir reports
+              - name: PerfAction for JMeter
+                uses: QAInsights/PerfAction@v5.6.2
+                with:
+                   test-plan-path: './latestjmeterjenkins.jmx'
+                   results-file: ./loadtest/result.jtl
+                   args: "-e -o ./loadtest/html"
