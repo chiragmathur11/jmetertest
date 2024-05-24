@@ -11,8 +11,6 @@ on:
     branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-env:
-  flag: 1
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -20,6 +18,8 @@ jobs:
     name: job1
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    outputs:
+        run_rest_jobs: ${{ steps.set_output.outputs.run_jobs }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -70,11 +70,18 @@ jobs:
               awk -F "," 'NR>1{if($8=="true") print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt`
               #echo "This is $TEXT"
-              if[$TEXT=="false"]
-              then
-                  echo "step 1" 
-                  exit 1
+              #if[$TEXT=="false"]
+              if [[$TEXT != "false"]]; then
+              echo "::set-output name=run_jobs::true"
               else
-                  echo "step 2"
+              echo "::set-output name=run_jobs::false"
               fi
-              #echo "This is successfull"
+           
+  job2:
+   name: Job 2
+   needs: [job1]
+   if: needs.job01.outputs.run_rest_jobs == 'true'
+   runs-on: ubuntu-latest
+   steps:
+   - name: the rest jobs
+     run: echo "run the rest jobs" 
