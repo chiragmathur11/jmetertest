@@ -68,11 +68,5 @@ jobs:
           #$content = Get-Content $file
           #echo "$content"
               awk -F "," 'NR>1{if($8=="true") print $8}' sanity/result.jtl >> abc.txt
-              TEXT=$('cat abc.txt')
-              echo $TEXT
-              #cat abc.txt
-              #echo "$file_contents=$(cat abc.txt)" >> $GITHUB_ENV
-              #echo "${{env.file_contents}}"
-      #- name: column read
-       # run: |
-        #  awk -F -V "," 'NR>1{if($5=="OK") print "hello"}' sanity/result.jtl
+              TEXT=`cat abc.txt`
+              echo "$TEXT"
