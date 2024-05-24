@@ -33,7 +33,7 @@ jobs:
         uses: QAInsights/PerfAction@v5.6.2
         with:
           # JMeter test plan to execute
-          test-plan-path: './latestjmeterjenkins.jmx'
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
@@ -63,7 +63,9 @@ jobs:
 
 
       - name: conditioncheck
-        run: awk -F "," 'NR>1{if($5=="OK") print $5}' sanity/result.jtl
+        run: |
+              awk -F "," 'NR>1{if($8=="true") print $5}' sanity/result.jtl >> abc.txt
+              echo abc.txt
 
       #- name: column read
        # run: |
