@@ -68,8 +68,8 @@ jobs:
           #$content = Get-Content $file
           #echo "$content"
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
-              TEXT=`cat abc.txt | grep false | wc -l` 
-              echo "This is $TEXT"
+              TEXT=`cat abc.txt | grep false | wc -l` >> $GITHUB_ENV
+              echo "This is ${{env.TEXT}}" 
               #if [$TEXT > 1]
               #echo "reach"
              # echo "::set-output name=run_jobs::true"
@@ -88,7 +88,7 @@ jobs:
            #if: "contains($Text, '2')"
           # run: echo "There is two error"
 
-      - if: $TEXT > 1
+      - if: ${{env.TEXT}} > 1
         name: IF
         run: |
              echo "line 1"
