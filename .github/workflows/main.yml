@@ -70,19 +70,19 @@ jobs:
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT"
-              #if [$TEXT > 1]; then
-              if: $TEXT < '3'
+              if [$TEXT > 1]; then
+              #if: $TEXT < '3'
               #if ($TEXT < 3)
-              {
+              
               echo "reach"
               echo "::set-output name=run_jobs::true"
-              }
+              
               else
-              {
+              echo "reach 1"
               echo "::set-output name=run_jobs::false"
-              }
+              
               fi
-              if: github.repository == 'octo-org/octo-repo-prod'
+              #if: github.repository == 'octo-org/octo-repo-prod'
 
   job2:
     name: Job 2
