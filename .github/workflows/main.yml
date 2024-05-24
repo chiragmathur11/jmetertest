@@ -69,4 +69,4 @@ jobs:
           #echo "$content"
               awk -F "," 'NR>1{if($8=="true") print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt`
-              echo "$TEXT"
+              echo "This is $TEXT"
