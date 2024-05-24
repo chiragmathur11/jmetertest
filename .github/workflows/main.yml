@@ -71,7 +71,7 @@ jobs:
               TEXT=`cat abc.txt`
               #echo "This is $TEXT"
               #if[$TEXT=="false"]
-              if [[$TEXT != "false"]]; then
+              if [[$TEXT == "true"]]; then
               echo "::set-output name=run_jobs::true"
               else
               echo "::set-output name=run_jobs::false"
