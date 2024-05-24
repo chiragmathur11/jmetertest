@@ -33,7 +33,7 @@ jobs:
         uses: QAInsights/PerfAction@v5.6.2
         with:
           # JMeter test plan to execute
-          test-plan-path: './latestjmeterjenkins.jmx'
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
@@ -70,9 +70,18 @@ jobs:
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT"
-              #if[$TEXT=="false"]
-              #if [[$TEXT contains "true"]]; then
-              #echo "::set-output name=run_jobs::true"
-              #else
-              #echo "::set-output name=run_jobs::false"
-              #fi
+              #if [$TEXT > 1]; then
+              if [[$TEXT > 0]]; then
+              echo "::set-output name=run_jobs::true"
+              else
+              echo "::set-output name=run_jobs::false"
+              fi
+
+  job2:
+    name: Job 2
+    needs: [job1]
+    if: needs.job1.outputs.run_rest_jobs == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: the rest jobs
+      run: echo "run the rest jobs" 
