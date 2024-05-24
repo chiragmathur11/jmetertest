@@ -66,11 +66,12 @@ jobs:
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT" 
-              if($TEXT>1)
+              if [ ${{ TEXT }} >= 2 ]; then
               {
                 echo "First"
               }
-              if($TEXT<1)
+              else
               {
                 echo "Second"
               }
+              fi
