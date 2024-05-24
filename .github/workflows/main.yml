@@ -64,8 +64,8 @@ jobs:
 
       - name: conditioncheck
         run: |
-              awk -F "," 'NR>1{if($8=="true") print $5}' sanity/result.jtl >> $a
-              echo $a
+              awk -F "," 'NR>1{if($8=="true") print "Hello"}' sanity/result.jtl >> abc.txt
+              cat abc.txt
       #- name: column read
        # run: |
         #  awk -F -V "," 'NR>1{if($5=="OK") print "hello"}' sanity/result.jtl
