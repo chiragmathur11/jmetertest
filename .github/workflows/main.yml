@@ -65,6 +65,7 @@ jobs:
       - name: conditioncheck
         run: |
               awk -F "," 'NR>1{if($8=="true") print $8}' sanity/result.jtl >> abc.txt
+              cat abc.txt
               echo "file_contents=$(cat abc.txt)" >> $GITHUB_ENV
               echo "${{env.file_contents}}"
       #- name: column read
