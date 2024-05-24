@@ -79,8 +79,8 @@ jobs:
            
   job2:
    name: Job 2
-   needs: [job1]
-   if: needs.job01.outputs.run_rest_jobs == 'true'
+   needs: job1
+   if: needs.job1.outputs.run_rest_jobs == 'true'
    runs-on: ubuntu-latest
    steps:
    - name: the rest jobs
