@@ -68,10 +68,12 @@ jobs:
           #$content = Get-Content $file
           #echo "$content"
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
-              TEXT=`cat abc.txt | grep false | wc -l` >> $GITHUB_ENV
-              echo "This is ${{env.TEXT}}" 
+              TEXT=`cat abc.txt | grep false | wc -l`
+              echo "This is $TEXT" 
               #if [$TEXT > 1]
-              if: $TEXT > 1
+      - name: if condition
+        if: $TEXT > 1
+        run: |
               echo "reach"
               echo "::set-output name=run_jobs::true"
              # else
@@ -98,9 +100,9 @@ jobs:
               
   job2:
     name: Job 2
-    needs: [job1]
+    needs: job1
     if: needs.job1.outputs.run_rest_jobs == 'true'
     runs-on: ubuntu-latest
     steps:
     - name: the rest jobs
-      run: echo "run the rest jobs" 
+      run: echo "run the rest jobs"
