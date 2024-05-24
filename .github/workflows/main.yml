@@ -64,4 +64,4 @@ jobs:
       - name: column read
         run: |
           var2=$(awk -F "," 'NR>1{if($5=="OK") print "hello"}' sanity/result.jtl)
-          echo $var2
+          echo $(var2)
