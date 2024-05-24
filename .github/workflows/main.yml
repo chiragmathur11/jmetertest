@@ -70,7 +70,7 @@ jobs:
               {
                 echo "First"
               }
-              else
+              elseif($TEXT<1)
               {
                 echo "Second"
               }
