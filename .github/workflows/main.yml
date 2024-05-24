@@ -64,7 +64,7 @@ jobs:
 
       - name: conditioncheck
         run: |
-              var1=awk "," 'NR>1{if($8=="true") print $8}' sanity/result.jtl
+              var1=$("awk -F "," 'NR>1{if($8=="true") print $8}' sanity/result.jtl")
               echo "$var1"
               #cat abc.txt
       #- name: column read
