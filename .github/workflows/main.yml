@@ -71,7 +71,7 @@ jobs:
               TEXT=`cat abc.txt | grep false | wc -l` >> $GITHUB_ENV
               echo "This is ${{env.TEXT}}" 
               #if [$TEXT > 1]
-              if: $TEXT < 1
+              if: $TEXT > 1
               echo "reach"
               echo "::set-output name=run_jobs::true"
              # else
