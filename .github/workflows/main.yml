@@ -68,7 +68,7 @@ jobs:
           #$content = Get-Content $file
           #echo "$content"
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
-              TEXT=`cat abc.txt | grep false | wc -l`
+              TEXT=`cat abc.txt | grep false | wc -l` 
               echo "This is $TEXT"
               #if [$TEXT > 1]
               #echo "reach"
@@ -88,7 +88,7 @@ jobs:
            #if: "contains($Text, '2')"
           # run: echo "There is two error"
 
-      - if: $Text > 1
+      - if: $TEXT > 1
         name: IF
         run: |
              echo "line 1"
