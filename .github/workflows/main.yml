@@ -65,7 +65,7 @@ jobs:
         #run: myValue=awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> $GITHUB_ENV
         #run: awk -F "," '{if($5=="OK") print $5}' sanity/result.jtl >> abc.txt
         run: |
-          awk -F "," '{
+          awk -F "," 'NR>1 {
           if($5=="OK")
           {
           print "Hello Chirag"
