@@ -70,9 +70,7 @@ jobs:
               {
                 echo "First"
               }
-              fi
               if($TEXT<1)
               {
                 echo "Second"
               }
-              fi
