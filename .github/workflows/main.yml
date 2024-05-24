@@ -63,7 +63,7 @@ jobs:
 
 
       - name: conditioncheck
-      - run: | 
+        run: | 
            awk -F "," 'NR>1 {
            if($5=="OK")
            {
