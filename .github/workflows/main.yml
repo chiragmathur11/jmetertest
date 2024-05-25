@@ -84,4 +84,5 @@ jobs:
     needs: a
     if: needs.a.outputs.run_job_b == 'yes'
     steps:
-      - run: echo "B"
+      - name: run job 2
+        run: echo "B"
