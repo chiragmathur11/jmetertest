@@ -81,8 +81,7 @@ jobs:
   b:
     name: b
     runs-on: ubuntu-latest
-    needs:
-      - a
+    needs: a
     if: needs.a.outputs.run_job_b == 'yes'
     steps:
       - run: echo "B"
