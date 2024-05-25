@@ -64,7 +64,6 @@ jobs:
               echo "This is $TEXT" 
               if [ ${TEXT} > 1 ]; then
               {
-                echo "first"
                 echo "::set-output name=run_jobs::true"
               }
               else
