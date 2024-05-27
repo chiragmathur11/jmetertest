@@ -10,7 +10,17 @@ jobs:
     name: a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "A"
+      - uses: actions/checkout@v4
+      - name: Create sanity directory
+        run: mkdir sanity
+      - name: Sanity
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          # JMeter test plan to execute
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
+          # Where to store the results e.g., result.csv
+          results-file: ./sanity/result.jtl
+          args: "-e -o ./sanity/html"
       - id: set
         run: |
           echo "::set-output name=run_job_b::yes"
