@@ -36,6 +36,11 @@ jobs:
           name: jmeter-resultss
           path: sanity/result.jtl
           if-no-files-found: error
+      - name: conditioncheck
+        run: |
+              awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
+              TEXT=`cat abc.txt | grep false | wc -l`
+              echo "This is $TEXT" 
     outputs:
       run_job_b: ${{ steps.set.outputs.run_job_b }}
   b:
