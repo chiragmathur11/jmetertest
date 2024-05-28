@@ -4,7 +4,11 @@ name: Workflow1
 
 # Controls when the workflow will run
 on:
-  workflow_dispatch:
+ push:
+    branches: [ "main" ]
+ pull_request:
+  branches: [ "main" ]
+ workflow_dispatch:
     inputs: 
       workflow2_name:
         description: 'Workflow2 Name for Triggering'
