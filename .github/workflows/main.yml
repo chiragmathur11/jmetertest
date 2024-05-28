@@ -43,7 +43,8 @@ jobs:
               echo "This is $TEXT" 
               if [ ${TEXT} < 1 ]; then
               {
-                echo "::set-output name=run_job_b::yes"
+                 echo "Test done"
+               # echo "::set-output name=run_job_b::yes"
               }
               else
               {
@@ -52,12 +53,3 @@ jobs:
               fi
     outputs:
       run_job_b: ${{ steps.set.outputs.run_job_b }}
-  b:
-    name: b
-    runs-on: ubuntu-latest
-    needs:
-      - a
-    if: needs.a.outputs.run_job_b == 'no'
-    #if: needs.a.result == 'success'
-    steps:
-      - run: echo "B"
