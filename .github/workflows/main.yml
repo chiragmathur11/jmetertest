@@ -1,14 +1,34 @@
 name: main
-on:
+on:        
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+   inputs: 
+      workflow2_name:
+        description: 'Workflow2 Name for Triggering'
+        required: true
+        default: 'Workflow2'
+      
+      workflow2_github_account:
+        description: 'GitHub Account Owner'
+        required: true
+        default: 'chiragmathur11'
+      
+      workflow2_repo_github:
+        description: 'GitHub Repository Name'
+        required: true
+        default: 'jmetertest'
 jobs:
   a:
     name: a
     runs-on: ubuntu-latest
+    env: 
+      pat_token: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
+      payload_Baseline_Number: "BSL_001"
+      payload_Baseline_Revision: "zsfdgsdbgngffdwdx1dxvv2"
+      
     steps:
       - uses: actions/checkout@v4
       - name: Create sanity directory
@@ -64,3 +84,8 @@ jobs:
     #if: needs.a.result == 'success'
      steps:
       - run: echo "B"
+   
+      - name: Trigger the Workflow
+        run: |
+         cd "$GITHUB_WORKSPACE/"
+         python $GITHUB_WORKSPACE/workflow_trigger.py ${{ env.pat_token }}  ${{ github.event.inputs.workflow2_github_account}}  ${{ github.event.inputs.workflow2_repo_github}} ${{ github.event.inputs.workflow2_name}} ${{ env.payload_Baseline_Number }} ${{ env.payload_Baseline_Revision }}
