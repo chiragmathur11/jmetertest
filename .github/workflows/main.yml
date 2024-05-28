@@ -74,7 +74,7 @@ jobs:
           # JMeter test plan to execute
           test-plan-path: './firstlatestjmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
-          results-file: ./LoadTesty/result.jtl
+          results-file: ./LoadTest/result.jtl
           args: "-e -o ./LoadTest/html"
       #- id: set
         #run: |
