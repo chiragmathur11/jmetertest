@@ -1,4 +1,4 @@
-name: test
+name: main
 on:
   push:
     branches: [ "main" ]
@@ -44,12 +44,12 @@ jobs:
               if [ ${TEXT} > 4 ]
               {
                  echo "Test done"
-                 echo "::set-output name=run_job_b::yes"
+                 #echo "::set-output name=run_job_b::yes"
               }
               else
               {
                 echo "Test Failed"
-                echo "::set-output name=run_job_b::no"
+                #echo "::set-output name=run_job_b::no"
               }
               fi
     outputs:
