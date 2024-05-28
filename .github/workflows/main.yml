@@ -16,13 +16,13 @@ jobs:
         uses: QAInsights/PerfAction@v5.6.2
         with:
           # JMeter test plan to execute
-          test-plan-path: './firstlatestjmeterjenkins.jmx'
+          test-plan-path: './newjmeterjenkins1.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
       - id: set
-        run: |
-          echo "::set-output name=run_job_b::yes"
+        #run: |
+         # echo "::set-output name=run_job_b::yes"
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
@@ -49,7 +49,7 @@ jobs:
               else
               {
                 echo "Sanity Pass"
-                cho "::set-output name=run_job_a::yes"
+                echo "::set-output name=run_job_a::yes"
               }
               fi
     outputs:
