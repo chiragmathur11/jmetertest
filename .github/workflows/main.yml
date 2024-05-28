@@ -25,7 +25,7 @@ jobs:
     name: a
     runs-on: ubuntu-latest
     env: 
-      pat_token: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
+      pat_token: ${{ secrets.PAT_TOKEN_GITHUB }}
       payload_Baseline_Number: "BSL_001"
       payload_Baseline_Revision: "zsfdgsdbgngffdwdx1dxvv2"
       
