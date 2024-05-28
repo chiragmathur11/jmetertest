@@ -40,16 +40,12 @@ jobs:
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT" 
-              if [ ${TEXT} > 3 ]; then
-              {
+              if [ $TEXT > 3 ]; then
                  echo "Sanity Failed"
                  exit 1  
-              }
               else
-              {
                 echo "Sanity Pass"
                 echo "::set-output name=run_job_b::yes"
-              }
               fi
     outputs:
       run_job_b: ${{ steps.set.outputs.run_job_b }}
