@@ -43,13 +43,13 @@ jobs:
               if [ ${TEXT} > 1 ]; then
               {
                  echo "Sanity Failed"
-                 echo "::set-output name=run_job_a::no"
+                 echo "::set-output name=run_job_b::no"
                  exit 1
               }
               else
               {
                 echo "Sanity Pass"
-                echo "::set-output name=run_job_a::yes"
+                echo "::set-output name=run_job_b::yes"
               }
               fi
     outputs:
