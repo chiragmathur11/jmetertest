@@ -19,7 +19,7 @@ jobs:
         id: set_output
         run: |
              codeChanges="only within certain files"
-             if [[$codeChanges == "only within certain files"]]; then
+             if [[${codeChanges} == "only within certain files"]]; then
              echo "::set-output name=run_jobs::true"
              else
              echo "::set-output name=run_jobs::false"
