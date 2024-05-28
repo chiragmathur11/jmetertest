@@ -43,11 +43,12 @@ jobs:
               echo "This is $TEXT" 
               if [ ${TEXT} > 4 ]; then
               {
-                 #echo "Test done"
+                 echo "Test done"
                  echo "::set-output name=run_job_b::yes"
               }
               else
               {
+                echo "Test Failed"
                 exit 1
               }
               fi
