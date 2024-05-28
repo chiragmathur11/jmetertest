@@ -26,14 +26,6 @@ def trigger_workflow(Workflow_Name,pl_Baseline_Number,pl_Baseline_Revision):
           'revision_number': pl_Baseline_Revision
         }
       }
-
-
-      responseValue=requests.post(f"https://api.github.com/repos/{OWNER}/{REPO}/dispatches",json=data,headers=headers)
+ responseValue=requests.post(f"https://api.github.com/repos/{OWNER}/{REPO}/dispatches",json=data,headers=headers)
       print(responseValue.content)
-
-
-     # responsevalue=requests.post(f"https://api.github.com/repos/{OWNER}/{REPO}/dispatches",json=data,headers=headers)
-    #  print("The respoinse message is ",responsevalue.content)
-
-
 trigger_workflow(Workflow_Name,pl_Baseline_Number,pl_Baseline_Revision)
