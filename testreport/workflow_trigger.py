@@ -3,12 +3,12 @@ import os
 import requests
 import sys
 
-TOKEN= str(sys.argv[11])
-OWNER= str(sys.argv[12])
-REPO= str(sys.argv[13])
-Workflow_Name= str(sys.argv[14])
-pl_Baseline_Number= str(sys.argv[15])
-pl_Baseline_Revision = str(sys.argv[16])
+TOKEN= str(sys.argv[0])
+OWNER= str(sys.argv[1])
+REPO= str(sys.argv[2])
+Workflow_Name= str(sys.argv[3])
+pl_Baseline_Number= str(sys.argv[4])
+pl_Baseline_Revision = str(sys.argv[5])
 
 
 print( "the toke value is")
