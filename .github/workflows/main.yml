@@ -20,9 +20,9 @@ jobs:
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
-      #- id: set
-        #run: |
-         # echo "::set-output name=run_job_b::yes"
+      - id: set
+        run: |
+          echo "::set-output name=run_job_a::yes"
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
