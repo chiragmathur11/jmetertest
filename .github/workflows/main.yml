@@ -43,8 +43,8 @@ jobs:
               echo "This is $TEXT" 
               if [ ${TEXT} > 1 ]; then
               {
-                 echo "Test done"
-               # echo "::set-output name=run_job_b::yes"
+                 #echo "Test done"
+                 echo "::set-output name=run_job_b::yes"
               }
               else
               {
