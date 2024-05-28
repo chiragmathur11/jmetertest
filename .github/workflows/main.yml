@@ -16,7 +16,7 @@ jobs:
         uses: QAInsights/PerfAction@v5.6.2
         with:
           # JMeter test plan to execute
-          test-plan-path: './newjmeterjenkins1.jmx'
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
@@ -42,18 +42,17 @@ jobs:
               echo "This is $TEXT" 
               if [ ${TEXT} > 1 ]; then
               {
-                 echo "Sanity Failed"
-                 echo "::set-output name=run_job_b::no"
-                 exit 1
+                 echo "Sanity Pass"
+                 echo "::set-output name=run_job_b::yes"
               }
               else
               {
-                echo "Sanity Pass"
-                echo "::set-output name=run_job_b::yes"
+                echo "Sanity Failed"
+                exit 1
               }
               fi
     outputs:
-      run_job_b: ${{ steps.set.outputs.run_job_a }}
+      run_job_b: ${{ steps.set.outputs.run_job_b }}
 
   b:
      name: b
