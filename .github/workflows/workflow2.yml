@@ -1,3 +1,5 @@
+# This is a basic workflow to help you get started with Actions
+
 name: Workflow2
 
 # Controls when the workflow will run
@@ -13,5 +15,20 @@ jobs:
     env:
        baselineTag: ${{ github.event.client_payload.baselinetag }}
        revision_number: ${{ github.event.client_payload.revision_number }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - run: echo "This is 2nd Workflow"
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          echo $baselineTag
+          echo $revision_number
