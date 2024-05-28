@@ -22,9 +22,9 @@ jobs:
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
-      - id: set
-        run: |
-          echo "::set-output name=run_job_b::yes"
+     # - id: set
+      #  run: |
+        #  echo "::set-output name=run_job_b::yes"
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
@@ -44,7 +44,7 @@ jobs:
              awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
              TEXT=`cat abc.txt | grep false | wc -l`
              echo "This is $TEXT"
-             if [[${TEXT} > 1]]; then
+             if [${TEXT} > 1]; then
              echo "::set-output name=run_jobs::true"
              else
              echo "::set-output name=run_jobs::false"
