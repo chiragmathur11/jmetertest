@@ -4,7 +4,7 @@ import requests
 import sys
 
 TOKEN= str(sys.argv[0])
-OWNER= str(sys.argv[2])
+OWNER= str(sys.argv[0])
 REPO= str(sys.argv[3])
 Workflow_Name= str(sys.argv[4])
 pl_Baseline_Number= str(sys.argv[5])
