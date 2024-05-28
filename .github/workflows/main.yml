@@ -54,7 +54,6 @@ jobs:
               {
                 echo "Test Failed"
                 exit 1
-                #echo "::set-output name=run_job_b::no"
               }
               fi
     outputs:
@@ -65,6 +64,30 @@ jobs:
      needs:
        - a
      if: needs.a.outputs.run_job_b == 'yes'
-    #if: needs.a.result == 'success'
      steps:
-      - run: echo "B"
+      - uses: actions/checkout@v4
+      - name: Create load test directory
+        run: mkdir loadreport
+      - name: LoadTest
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          # JMeter test plan to execute
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
+          # Where to store the results e.g., result.csv
+          results-file: ./LoadTesty/result.jtl
+          args: "-e -o ./LoadTest/html"
+      #- id: set
+        #run: |
+          #echo "::set-output name=run_job_b::yes"
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-resultss
+          path: LoadTest/result.jtl
+          if-no-files-found: error
+      - name: Upload HTML Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-resultss
+          path: LoadTest/result.jtl
+          if-no-files-found: error
