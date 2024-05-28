@@ -69,7 +69,7 @@ jobs:
           # JMeter test plan to execute
           test-plan-path: './firstlatestjmeterjenkins.jmx'
           # Where to store the results e.g., result.csv
-          results-file: ./LoadTest/result.jtl
+          results-file: ./LoadTest/result1.jtl
           args: "-e -o ./LoadTest/html"
       #- id: set
         #run: |
@@ -78,11 +78,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: LoadTest-results
-          path: LoadTest/result.jtl
+          path: LoadTest/result1.jtl
           if-no-files-found: error
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v3
         with:
           name: LoadTest-results
-          path: LoadTest/result.jtl
+          path: LoadTest/result1.jtl
           if-no-files-found: error
