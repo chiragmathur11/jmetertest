@@ -11,15 +11,40 @@ jobs:
     outputs:
       run_rest_jobs: ${{ steps.set_output.outputs.run_jobs }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Create sanity directory
+        run: mkdir sanity
+      - name: Sanity
+        uses: QAInsights/PerfAction@v5.6.2
         with:
-          fetch-depth: 2
-      - name: git diff and set output
+          # JMeter test plan to execute
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
+          # Where to store the results e.g., result.csv
+          results-file: ./sanity/result.jtl
+          args: "-e -o ./sanity/html"
+      - id: set
+        run: |
+          echo "::set-output name=run_job_b::yes"
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: sanity-results
+          path: sanity/result.jtl
+          if-no-files-found: error
+      - name: Upload HTML Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: sanity-results
+          path: sanity/result.jtl
+          if-no-files-found: error
+          
+      - name: conditioncheck
         id: set_output
         run: |
-             codeChanges="only within certain files"
-             if [[${codeChanges} == "only within certain files"]]; then
+             awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
+             TEXT=`cat abc.txt | grep false | wc -l`
+             echo "This is $TEXT"
+             if [[${TEXT} > 1]]; then
              echo "::set-output name=run_jobs::true"
              else
              echo "::set-output name=run_jobs::false"
