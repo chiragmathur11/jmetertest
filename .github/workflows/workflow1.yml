@@ -14,12 +14,12 @@ on:
       workflow2_github_account:
         description: 'GitHub Account Owner'
         required: true
-        default: 'sumitraj0103'
+        default: 'chiragmathur11'
       
       workflow2_repo_github:
         description: 'GitHub Repository Name'
         required: true
-        default: 'Letsdevops'
+        default: 'jmetertest'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,6 +36,8 @@ jobs:
     steps:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Print Hello
+        run: echo Hello
       - uses: actions/checkout@v3
 
       - name: setup python
@@ -45,12 +47,11 @@ jobs:
          
       - name: Install dependencies
         run: |
-           cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
+           cd "$GITHUB_WORKSPACE/testreport/"
            python -m pip install --upgrade pip
            pip install -r requirements.txt
           
       - name: Trigger the Workflow
         run: |
-         cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
-         python $GITHUB_WORKSPACE/Deployment-Scripts/workflow_trigger.py ${{ env.pat_token }}  ${{ github.event.inputs.workflow2_github_account}}  ${{ github.event.inputs.workflow2_repo_github}} ${{ github.event.inputs.workflow2_name}} ${{ env.payload_Baseline_Number }} ${{ env.payload_Baseline_Revision }}
-    
+         cd "$GITHUB_WORKSPACE/testreport/"
+         python $GITHUB_WORKSPACE/testreport/workflow_trigger.py ${{ env.pat_token }}  ${{ github.event.inputs.workflow2_github_account}}  ${{ github.event.inputs.workflow2_repo_github}} ${{ github.event.inputs.workflow2_name}} ${{ env.payload_Baseline_Number }} ${{ env.payload_Baseline_Revision }}
