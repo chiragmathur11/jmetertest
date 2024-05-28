@@ -45,8 +45,7 @@ jobs:
                  echo "Sanity Pass"
                  echo "::set-output name=run_job_b::yes"
               }
-              fi
-              if [ ${TEXT} < 1 ]; then
+              else
               {
                 echo "Sanity Failed"
                 exit 1
