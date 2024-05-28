@@ -38,16 +38,16 @@ jobs:
       - name: conditioncheck
         run: |
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
-              TEXT=`cat abc.txt | grep false | wc -l`
+              TEXT=`cat abc.txt | grep true | wc -l`
               echo "This is $TEXT" 
               if [ ${TEXT} > 1 ]; then
               {
-                 echo "Test done"
+                 echo "Sanity Pass"
                  echo "::set-output name=run_job_b::yes"
               }
               else
               {
-                echo "Test Failed"
+                echo "Sanity Failed"
                 exit 1
               }
               fi
