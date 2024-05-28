@@ -7,12 +7,7 @@ on:
 jobs:
   a:
     name: a
-    runs-on: ubuntu-latest
-    #env: 
-    #  pat_token: ${{ secrets.PAT_TOKEN_GITHUB }}
-     # payload_Baseline_Number: "BSL_001"
-     # payload_Baseline_Revision: "zsfdgsdbgngffdwdx1dxvv2"
-      
+    runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v4
       - name: Create sanity directory
@@ -31,13 +26,13 @@ jobs:
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
-          name: jmeter-resultss
+          name: sanity-results
           path: sanity/result.jtl
           if-no-files-found: error
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v3
         with:
-          name: jmeter-resultss
+          name: sanity-results
           path: sanity/result.jtl
           if-no-files-found: error
       - name: conditioncheck
@@ -82,12 +77,12 @@ jobs:
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
-          name: jmeter-resultss
+          name: LoadTest-results
           path: LoadTest/result.jtl
           if-no-files-found: error
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v3
         with:
-          name: jmeter-resultss
+          name: LoadTest-results
           path: LoadTest/result.jtl
           if-no-files-found: error
