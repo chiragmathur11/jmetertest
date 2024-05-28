@@ -44,7 +44,7 @@ jobs:
               if [ ${TEXT} > 4 ]
               {
                  echo "Test done"
-                 #echo "::set-output name=run_job_b::yes"
+                 echo "::set-output name=run_job_b::yes"
               }
               else
               {
