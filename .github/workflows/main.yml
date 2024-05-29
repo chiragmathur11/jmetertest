@@ -45,7 +45,7 @@ jobs:
              awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
              TEXT=`cat abc.txt | grep false | wc -l`
              echo "This is $TEXT"
-             if [${TEXT} > 1]; then
+             if ($TEXT > 1); then
              echo "::set-output name=run_jobs::true"
              else
              echo "::set-output name=run_jobs::false"
