@@ -2,8 +2,8 @@ name: main
 on:   
   push:
     branches: [ "main" ]
-  pull_request:
-   branches: [ "main" ]
+  #pull_request:
+  # branches: [ "main" ]
 jobs:
   a:
     name: a
@@ -37,13 +37,10 @@ jobs:
           if-no-files-found: error
       - name: conditioncheck
         run: |
-              awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
-              TEXT=`cat abc.txt | grep false | wc -l`
-              echo "This is $TEXT" 
-              if [ ${TEXT} > 3 ]; then
-              echo "This is Pass"
-              elif [ ${TEXT} < 1 ]; then
-              echo "This is Fail"
+              if [ ${{ github.event_name }} == 'pull_request' ]; then
+              echo "This is a pull request event"
+              elif [ ${{ github.event_name }} == 'push' ]; then
+              echo "This is a push event"
               else
               echo "This is an unknown event"
               fi
