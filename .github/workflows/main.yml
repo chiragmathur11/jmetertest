@@ -43,10 +43,13 @@ jobs:
               echo "This is $TEXT" 
               if [ $TEXT == 0 ]; then
               echo "This is first"
+              echo "::set-output name=run_job_b::yes"
               elif [ $TEXT == 1  ]; then
               echo "This is second"
-              elif [ $TEXT == 4  ]; then
+              echo "::set-output name=run_job_b::yes"
+              elif [ $TEXT == 2  ]; then
               echo "This is third"
+              echo "::set-output name=run_job_b::yes"
               else
               echo "This is an unknown event"
               exit 1
