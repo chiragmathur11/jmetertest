@@ -45,10 +45,11 @@ jobs:
               echo "This is first"
               elif [ $TEXT == 1  ]; then
               echo "This is second"
-              elif [ $TEXT == 2  ]; then
+              elif [ $TEXT == 4  ]; then
               echo "This is third"
               else
               echo "This is an unknown event"
+              exit 1
               fi
              
     outputs:
