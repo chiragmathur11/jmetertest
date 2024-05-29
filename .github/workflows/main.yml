@@ -41,10 +41,12 @@ jobs:
               awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
               TEXT=`cat abc.txt | grep false | wc -l`
               echo "This is $TEXT" 
-              if [ (${TEXT} == 0) || (${TEXT} == 1) || (${TEXT} == 2) ]; then
-              echo "This is a pull request event"
-              elif [ (${TEXT} != 0) || (${TEXT} != 1) || (${TEXT} != 2) ]; then
-              echo "This is a push event"
+              if [ $TEXT == 0 ]; then
+              echo "This is first"
+              elif [ $TEXT == 1  ]; then
+              echo "This is second"
+              elif [ $TEXT == 2  ]; then
+              echo "This is third"
               else
               echo "This is an unknown event"
               fi
