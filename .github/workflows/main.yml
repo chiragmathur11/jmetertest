@@ -44,7 +44,7 @@ jobs:
               if [ $TEXT == 0 ]; then
               echo "This is first"
               echo "::set-output name=run_job_b::yes"
-              elif [ $TEXT == 1  ]; then
+              elif [ $TEXT == 2  ]; then
               echo "This is second"
               echo "::set-output name=run_job_b::yes"
               elif [ $TEXT == 4  ]; then
