@@ -6,11 +6,9 @@ on:
   pull_request:
    branches: [ "main" ]
 jobs:
-  job01:
-    name: Job 01
-    runs-on: ubuntu-latest
-    outputs:
-      run_rest_jobs: ${{ steps.set_output.outputs.run_jobs }}
+  a:
+    name: a
+    runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v4
       - name: Create sanity directory
@@ -23,9 +21,9 @@ jobs:
           # Where to store the results e.g., result.csv
           results-file: ./sanity/result.jtl
           args: "-e -o ./sanity/html"
-     # - id: set
-      #  run: |
-        #  echo "::set-output name=run_job_b::yes"
+      - id: set
+        run: |
+          echo "::set-output name=run_job_b::yes"
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
@@ -38,23 +36,49 @@ jobs:
           name: sanity-results
           path: sanity/result.jtl
           if-no-files-found: error
-          
       - name: conditioncheck
-        id: set_output
         run: |
-             awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
-             TEXT=`cat abc.txt | grep false | wc -l`
-             echo "This is $TEXT"
-             if ($TEXT > 1); then
-             echo "::set-output name=run_jobs::true"
-             else
-             echo "::set-output name=run_jobs::false"
-             fi
-  job02:
-    name: Job 02
-    needs: job01
-    if: needs.job01.outputs.run_rest_jobs == 'true'
-    runs-on: ubuntu-latest
-    steps:
-    - name: the rest jobs
-      run: echo "run the rest jobs"
+              awk -F "," 'NR>1{print $8}' sanity/result.jtl >> abc.txt
+              TEXT=`cat abc.txt | grep false | wc -l`
+              echo "This is $TEXT" 
+              if [[${TEXT} > 1]]; then
+                 echo "Sanity Failed"
+                 exit 1  
+              else
+                echo "Sanity Pass"
+                echo "::set-output name=run_job_b::yes"
+              fi
+    outputs:
+      run_job_b: ${{ steps.set.outputs.run_job_b }}
+
+  b:
+     name: b
+     runs-on: ubuntu-latest
+     needs:
+       - a
+     if: needs.a.outputs.run_job_b == 'yes'
+     steps:
+      - uses: actions/checkout@v4
+      - name: Create load test directory
+        run: mkdir loadreport
+      - name: LoadTest
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          # JMeter test plan to execute
+          test-plan-path: './firstlatestjmeterjenkins.jmx'
+          # Where to store the results e.g., result.csv
+          results-file: ./loadreport/result1.jtl
+          args: "-e -o ./loadreport/html"
+     
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: LoadTest-results
+          path: loadreport/result1.jtl
+          if-no-files-found: error
+      - name: Upload HTML Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: LoadTest-results
+          path: loadreport/result1.jtl
+          if-no-files-found: error
