@@ -43,7 +43,7 @@ jobs:
               echo "This is $TEXT" 
               if [ $TEXT != 2 ]; then
               echo "This is a pull request event"
-              elif [ $TEXT == 2 ]; then
+              elif [ $TEXT == 3 ]; then
               echo "This is a push event"
               else
               echo "This is an unknown event"
