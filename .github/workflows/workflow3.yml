@@ -1,9 +1,10 @@
-name: Workflow Trigger
+name: Workflow3
 
 on:
-  push:
-    branches:
-      - main
+ # push:
+  #  branches:
+   #   - main
+ workflow_dispatch:
 
 jobs:
 
@@ -26,5 +27,5 @@ jobs:
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.PAT_TOKEN_GITHUB }}" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/telus/BlazemeterIntegeration/actions/workflows/BlazeTest.yml/dispatches \
+            https://api.github.com/repos/chiragmathur11/jmetertest/actions/workflows/workflow4.yml/dispatches \
             -d '{"ref":"main"}'
