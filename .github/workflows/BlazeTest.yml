@@ -1,0 +1,140 @@
+name: BlazeTest
+
+#on:
+#  push:
+#    branches:
+#      - main
+on:
+ workflow_dispatch:
+    
+
+jobs:
+  run_blazemeter_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Start BlazeMeter test
+        id: start-blazemeter-test
+        run: |
+          # Make the API request to start the test
+          response=$(curl -X POST \
+                      -H "Content-Type: application/json" \
+                      -u "${{secrets.BLAZEMETER_API_KEY}}:${{secrets.BLAZEMETER_API_SECRET}}" \
+                      -d '{}' \
+                      https://a.blazemeter.com/api/v4/tests/14090731/start)
+          echo "$response"  # Print the response for debugging
+          test_id=$(echo "$response" | jq -r '.result.id')  # Capture the test ID from the response
+          echo "Test ID: $test_id"  # Print the captured test ID
+          echo "::set-output name=test_id::$test_id"  # Set the test ID as an output
+          workspace_id=$(echo "$response" | jq -r '.result.workspaceId')  # Capture the Workspace ID from the response
+          echo "Workspace ID: $workspace_id"  # Print the captured Workspace ID
+          echo "::set-output name=workspace_id::$workspace_id"  # Set the Workspace ID as an output
+          project_id=$(echo "$response" | jq -r '.result.projectId')  # Capture the Project ID from the response
+          echo "Project ID: $project_id"  # Print the captured Project ID
+          echo "::set-output name=project_id::$project_id"  # Set the Project ID as an output
+          
+
+      - name: Wait for BlazeMeter test completion
+        id: wait_for_completion
+        run: |
+          JOB_ID=${{ steps.start-blazemeter-test.outputs.test_id }}
+          while :; do
+            STATUS=$(curl -X GET \
+                      -H "Content-Type: application/json" \
+                      -u "${{secrets.BLAZEMETER_API_KEY}}:${{secrets.BLAZEMETER_API_SECRET}}" \
+                      -d '{}' \
+                      https://a.blazemeter.com/api/v4/masters/$JOB_ID/status | jq -r '.result.status')
+            echo "Test status: $STATUS"
+            if [ "$STATUS" == "ENDED" ]; then
+              break
+            fi
+            sleep 30
+          done
+
+      - name: Get BlazeMeter Public Token
+        id: generate_report
+        run: |
+          JOB_ID=${{ steps.start-blazemeter-test.outputs.test_id }}
+          publicToken=$(curl -X POST \
+                      -H "Content-Type: application/json" \
+                      -u "${{secrets.BLAZEMETER_API_KEY}}:${{secrets.BLAZEMETER_API_SECRET}}" \
+                      -d '{}' \
+                      https://a.blazemeter.com/api/v4/masters/$JOB_ID/public-token | jq -r '.result.publicToken')
+          echo $publicToken
+          echo "::set-output name=publicToken::$publicToken"  # Set the Project ID as an output
+
+      - name: Create URL file
+        run: echo "https://a.blazemeter.com/app/?public-token=${{ steps.generate_report.outputs.publicToken }}#/accounts/489484/workspaces/${{ steps.start-blazemeter-test.outputs.workspace_id }}/projects/${{ steps.start-blazemeter-test.outputs.project_id }}/masters/${{ steps.start-blazemeter-test.outputs.test_id }}/summary" > url.txt
+
+      - name: Upload URL artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: URL
+          path: url.txt
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Specify connection via URL (replaces server_address, server_port, secure,
+          # username and password)
+          #
+          # Format:
+          #
+          #  * smtp://user:password@smtp.gmail:456
+          #  * smtp+starttls://user:password@server:port
+          server_address: smtp.gmail.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended) mail server username:
+          username: donotreply.testresults@gmail.com
+          # Optional (recommended) mail server password:
+          password: dejmboawittsewdf
+          # Required mail subject:
+          subject: Blazemeter Test Result from GitHub
+          # Required recipients' addresses:
+          to: keshav.goel@telus.com
+          # Required sender full name (address can be skipped):
+          from: PerformanceResults@telus.com # <user@example.com>
+          # Optional plain body:
+          body: |
+            Hi Team,  
+
+            Please find the result summary here:
+            https://a.blazemeter.com/app/executive-summary/index.html?public-token=${{ steps.generate_report.outputs.publicToken }}&master_id=${{ steps.start-blazemeter-test.outputs.test_id }}&selectedTimeMeasure=seconds#/
+
+            
+            Please find Detailed Blazemeter Test Result here: 
+            https://a.blazemeter.com/app/?public-token=${{ steps.generate_report.outputs.publicToken }}#/accounts/489484/workspaces/${{ steps.start-blazemeter-test.outputs.workspace_id }}/projects/${{ steps.start-blazemeter-test.outputs.project_id }}/masters/${{ steps.start-blazemeter-test.outputs.test_id }}/summary
+
+            The above URL is generic and can be accessed without any login.
+            
+            This is a draft version of the email and will be formatted.
+
+            Thanks and Regards
+            Performance Testing Team
+         # Optional HTML body read from file:
+         # html_body: file://reports/html/index.html
+          # Optional carbon copy recipients:
+          cc: keshav.goel@telus.com
+          # Optional blind carbon copy recipients:
+         # bcc: r2d2@example.com,hansolo@example.com
+          # Optional recipient of the email response:
+          #reply_to: luke@example.com
+          # Optional Message ID this message is replying to:
+          #in_reply_to: <random-luke@example.com>
+          # Optional unsigned/invalid certificates allowance:
+          ignore_cert: true
+          contentType: text/html
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          priority: low
+          # Optional nodemailerlog: true/false
+          #nodemailerlog: false
+          # Optional nodemailerdebug: true/false if true lognodem will also be set true
+          #nodemailerdebug: false
