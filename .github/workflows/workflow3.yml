@@ -1,0 +1,30 @@
+name: Workflow Trigger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  DeveloperCode:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Developer Code goes here
+        run: |
+          echo "Developer Code goes here."  
+
+  trigger_Blazemeter_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Blazemeter Work flow
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.PAT_TOKEN_GITHUB }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/telus/BlazemeterIntegeration/actions/workflows/BlazeTest.yml/dispatches \
+            -d '{"ref":"main"}'
