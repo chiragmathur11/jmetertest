@@ -36,5 +36,5 @@ jobs:
 
       - name: Echo TestParameters.txt
         run: |
-             $params = "${{ steps.package.outputs.content }}" 
-             echo "$params"
+             cat TestParameters.txt >> abc.txt
+             TEXT=`cat abc.txt`
