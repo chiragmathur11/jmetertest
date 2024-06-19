@@ -32,13 +32,15 @@ jobs:
         uses: jaywcjlove/github-action-read-file@main
         with:
          path: TestParameters.txt
-         run: |
-             awk -F "," 'NR>1{print $1}' TestParameters.txt >> user.txt
-             VUsers=`cat user.txt`
-             awk -F "," 'NR>1{print $2}' TestParameters.txt >> rampup.txt
-             Rampup=`cat rampup.txt`
-             awk -F "," 'NR>1{print $3}' TestParameters.txt >> iteration.txt
-             Iterations=`cat iteration.txt`
+
+      - name: File Read
+        run: |
+             awk -F "," 'NR>1{print $1}' ./TestParameters.txt >> user.txt
+             VUsers="cat user.txt"
+             awk -F "," 'NR>1{print $3}' ./TestParameters.txt >> iter.txt
+             Iterations="cat iter.txt"
+             awk -F "," 'NR>1{print $2}' ./TestParameters.txt >> ramp.txt
+             Rampup="cat ramp.txt"
               echo "This is $VUsers Users"
-              echo "This is $Rampup Rampup"
               echo "This is $Iterations Iterations"
+              echo "This is $Rampup Rampup"
