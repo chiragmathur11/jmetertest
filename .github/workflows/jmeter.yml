@@ -33,14 +33,8 @@ jobs:
         with:
          path: TestParameters.txt
 
-      - name: File Read
+
+      - name: Echo TestParameters.txt
         run: |
-             awk -F "," 'NR>1{print $1}' ./TestParameters.txt >> user.txt
-             VUsers="cat user.txt"
-             awk -F "," 'NR>1{print $3}' ./TestParameters.txt >> iter.txt
-             Iterations="cat iter.txt"
-             awk -F "," 'NR>1{print $2}' ./TestParameters.txt >> ramp.txt
-             Rampup="cat ramp.txt"
-              echo "This is $VUsers Users"
-              echo "This is $Iterations Iterations"
-              echo "This is $Rampup Rampup"
+             $params = "${{ steps.package.outputs.content }}" 
+             echo "$params"
